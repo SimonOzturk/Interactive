@@ -4,6 +4,35 @@
 
 #!pwsh
 
+using namespace System.Management.Automation
+using namespace System.Net
+
+#!pwsh
+
+[ServicePointManager]::SecurityProtocol = [SecurityProtocolType]::Tls12
+
+#!pwsh
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned 
+
+#!pwsh
+
+Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+
+#!pwsh
+
+Install-Module -Name 'AzureADPreview' -Confirm:$false -Force
+
+#!pwsh
+
+Import-Module -Name 'AzureAD'
+
+#!pwsh
+
+Connect-AzureAD
+
+#!pwsh
+
 New-MsolGroup -ManagedBy "admin@domain.com"  -DisplayName "GroupCreators" -Description "Members of this group allow to Create Microsoft 365 Group"
 
 #!pwsh
