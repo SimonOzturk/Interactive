@@ -2,38 +2,80 @@
 
 # Restrict Access to Microsoft 365 Group Creation
 
+#!markdown
+
+Allows you to indicate which namespaces are used in the session. [about_Using](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_using?view=powershell-7.2)
+
 #!pwsh
 
 using namespace System.Management.Automation
 using namespace System.Net
 
+#!markdown
+
+As of April 2020, TLS 1.2 is set to be the default for the PowerShell Gallery.
+
+Please note that TLS 1.0 and 1.1 was already unsupported, but the actual deprecation when PowerShell Gallery will now stop accepting any connections using TLS 1.0 and 1.1 has occurred.
+
+We recommend that all client-server combinations use TLS 1.2 (or a later version) to maintain connection to the PowerShell Gallery.
+[PowerShell Gallery TLS Support
+](https://devblogs.microsoft.com/powershell/powershell-gallery-tls-support/)
+
 #!pwsh
 
 [ServicePointManager]::SecurityProtocol = [SecurityProtocolType]::Tls12
+
+#!markdown
+
+Describes the PowerShell execution policies and explains how to manage them. [about_Execution_Policies](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2)
 
 #!pwsh
 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned 
 
+#!markdown
+
+Sets values for a registered repository. [Set-PSRepository](https://docs.microsoft.com/en-us/powershell/module/powershellget/set-psrepository?view=powershell-7.2)
+
 #!pwsh
 
 Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+
+#!markdown
+
+Downloads one or more modules from a repository, and installs them on the local computer. [Install-Module](https://docs.microsoft.com/en-us/powershell/module/powershellget/install-module?view=powershell-7.2)
 
 #!pwsh
 
 Install-Module -Name 'AzureADPreview' -Confirm:$false -Force
 
+#!markdown
+
+Adds modules to the current session. [Import-Module](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/import-module?view=powershell-7.2)
+
 #!pwsh
 
 Import-Module -Name 'AzureAD'
+
+#!markdown
+
+Connects with an authenticated account to use Active Directory cmdlet requests. [Connect-AzureAD](https://docs.microsoft.com/en-us/powershell/module/azuread/connect-azuread?view=azureadps-2.0)
 
 #!pwsh
 
 Connect-AzureAD
 
+#!markdown
+
+Adds a new group to the Azure Active Directory. [New-AzureADGroup](https://docs.microsoft.com/en-us/powershell/module/azuread/new-azureadgroup?view=azureadps-2.0)
+
 #!pwsh
 
-New-MsolGroup -ManagedBy "admin@domain.com"  -DisplayName "GroupCreators" -Description "Members of this group allow to Create Microsoft 365 Group"
+New-AzureADGroup -DisplayName "GroupCreators" -Description "Members of this group allow to Create Microsoft 365 Group" -MailEnabled $false -SecurityEnabled $true
+
+#!markdown
+
+Gets a directory setting template. [Get-AzureADDirectorySettingTemplate](https://docs.microsoft.com/en-us/powershell/module/azuread/get-azureaddirectorysettingtemplate?view=azureadps-2.0-preview)
 
 #!pwsh
 
@@ -59,9 +101,17 @@ $Setting["EnableMIPLabels"] = "True"
 
 $Setting.Values
 
+#!markdown
+
+Creates a directory settings object. [New-AzureADDirectorySetting](https://docs.microsoft.com/en-us/powershell/module/azuread/new-azureaddirectorysetting?view=azureadps-2.0-preview)
+
 #!pwsh
 
 New-AzureADDirectorySetting -DirectorySetting $Setting
+
+#!markdown
+
+Updates a directory setting in Azure Active Directory. [Set-AzureADDirectorySetting](https://docs.microsoft.com/en-us/powershell/module/azuread/set-azureaddirectorysetting?view=azureadps-2.0-preview)
 
 #!pwsh
 
