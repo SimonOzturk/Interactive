@@ -1,0 +1,39 @@
+#!markdown
+
+# Restrict Access to Microsoft 365 Group Creation
+
+#!pwsh
+
+New-MsolGroup -ManagedBy "admin@domain.com"  -DisplayName "GroupCreators" -Description "Members of this group allow to Create Microsoft 365 Group"
+
+#!pwsh
+
+$Template = Get-AzureADDirectorySettingTemplate | Where-Object {$_.DisplayName -eq "Group.Unified"}
+
+#!pwsh
+
+if(!($Setting = Get-AzureADDirectorySetting | Where-Object {$_.TemplateId -eq $Template.Id})) 
+{
+    $Setting = $Template.CreateDirectorySetting()
+}
+
+#!pwsh
+
+$Setting["EnableGroupCreation"] = "False"
+$Setting["GroupCreationAllowedGroupId"] = (Get-AzureADGroup -SearchString "GroupCreators").objectid
+
+#!pwsh
+
+$Setting["EnableMIPLabels"] = "True" 
+
+#!pwsh
+
+$Setting.Values
+
+#!pwsh
+
+New-AzureADDirectorySetting -DirectorySetting $Setting
+
+#!pwsh
+
+Set-AzureADDirectorySetting -DirectorySetting $Setting
