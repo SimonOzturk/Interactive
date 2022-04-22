@@ -4,6 +4,10 @@
 
 #!markdown
 
+## Prep
+
+#!markdown
+
 Allows you to indicate which namespaces are used in the session. [about_Using](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_using?view=powershell-7.2)
 
 #!pwsh
@@ -43,6 +47,14 @@ Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
 
 #!markdown
 
+## Install Modules
+
+#!markdown
+
+### Install Module
+
+#!markdown
+
 Downloads one or more modules from a repository, and installs them on the local computer. [Install-Module](https://docs.microsoft.com/en-us/powershell/module/powershellget/install-module?view=powershell-7.2)
 
 #!pwsh
@@ -51,11 +63,19 @@ Install-Module -Name 'AzureADPreview' -Confirm:$false -Force
 
 #!markdown
 
+### Use existing Module
+
+#!markdown
+
 Adds modules to the current session. [Import-Module](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/import-module?view=powershell-7.2)
 
 #!pwsh
 
 Import-Module -Name 'AzureAD'
+
+#!markdown
+
+## Taks
 
 #!markdown
 

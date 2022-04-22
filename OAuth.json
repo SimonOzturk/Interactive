@@ -1,0 +1,6 @@
+{
+    "grant_type": "client_credentials",
+    "scope": "https://graph.microsoft.com/.default",
+    "client_id": "",
+    "client_secret": ""
+}

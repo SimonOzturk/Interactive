@@ -1,0 +1,26 @@
+#!pwsh
+
+$Url = "https://login.microsoftonline.com/<TenantIDHere>/oauth2/v2.0/token"
+
+#!pwsh
+
+#$OAuth = Get-Content ..\OAuth.json
+$OAuth = @{
+    grant_type = "client_credentials"
+    scope = "https://graph.microsoft.com/.default"
+    client_id = ""
+    client_secret = ""
+}
+
+#!pwsh
+
+$Token = (Invoke-RestMethod -Method Post -Uri $Url -Body $OAuth).access_token
+$Token
+
+#!pwsh
+
+(Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/groups" -Headers @{Authorization = "Bearer $($Token)"}).value
+
+#!pwsh
+
+Invoke-RestMethod -InFile ..\OAuth.json 

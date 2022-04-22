@@ -1,0 +1,7 @@
+{
+    "Tenant":{
+        "Domain":"<TenantDomain>.onmicrosoft.com",
+        "UserName":"admin@<TenantDomain>.onmicrosoft.com",
+        "Password":""
+    }
+}

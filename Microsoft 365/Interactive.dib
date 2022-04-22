@@ -1,0 +1,30 @@
+#!markdown
+
+# MSOnline PowerShell Module
+
+#!pwsh
+
+Import-Module -Name 'MSOnline'
+
+#!markdown
+
+### List All MSOnline Users
+
+Command that searches repository and gives you list of **MSOnline** User Commands
+
+#!pwsh
+
+Get-Command *MSOLUser*
+
+#!markdown
+
+Variable Sharing C# and Powershell
+
+#!csharp
+
+var x = "Hello World";
+
+#!pwsh
+
+#!share --from csharp x
+$x

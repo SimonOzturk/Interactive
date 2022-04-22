@@ -1,0 +1,46 @@
+#!csharp
+
+#r "nuget: Microsoft.Identity.Client"
+#r "nuget: System.Text.Json"
+#r "nuget: System.Net.Http.Json"
+#r "nuget: Microsoft.AspNet.WebApi.Client"
+
+#!csharp
+
+using System;
+using System.Text;
+using System.Text.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Microsoft.Identity.Client;
+using System.Net.Http.Formatting;
+
+#!csharp
+
+var TenantID = "";
+var ClientID = "";
+var ClientSecret = "";
+var Resource = "";
+var Authority = $"https://login.microsoftonline.com/{TenantID}";
+var Scopes = new[]{"https://graph.microsoft.com/.default"};
+
+var app = ConfidentialClientApplicationBuilder.Create(ClientID).WithClientSecret(ClientSecret).WithAuthority(Authority).Build();
+
+#!csharp
+
+var token = app.AcquireTokenForClient(Scopes).ExecuteAsync().Result.AccessToken;
+
+#!csharp
+
+var http = new HttpClient();
+http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",token);
+http.BaseAddress = new Uri("https://graph.microsoft.com/v1.0/");
+
+#!csharp
+
+var result = http.GetJsonAsync("groups").Result;
+
+#!csharp
+
+result
